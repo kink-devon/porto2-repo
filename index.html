@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Student</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 10%;
+background:rgba(255,255,255,0.03);
+backdrop-filter: blur(10px);
+position:fixed;
+width:100%;
+top:0;
+}
+
+nav h1{
+color:#38bdf8;
+letter-spacing:2px;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#38bdf8;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 10%;
+}
+
+.hero-text h2{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.hero-text span{
+color:#38bdf8;
+}
+
+.hero-text p{
+opacity:0.8;
+margin-bottom:25px;
+}
+
+.btn{
+padding:12px 25px;
+border:none;
+border-radius:8px;
+background:linear-gradient(45deg,#38bdf8,#6366f1);
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 15px #38bdf8;
+}
+
+/* PROFILE CARD */
+
+.profile{
+background:rgba(255,255,255,0.05);
+padding:30px;
+border-radius:15px;
+text-align:center;
+width:250px;
+backdrop-filter: blur(10px);
+}
+
+.profile img{
+width:120px;
+border-radius:50%;
+margin-bottom:10px;
+border:3px solid #38bdf8;
+}
+
+/* SECTION */
+
+section{
+padding:100px 10%;
+}
+
+.section-title{
+font-size:32px;
+margin-bottom:40px;
+color:#38bdf8;
+}
+
+/* SKILLS */
+
+.skills{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.skill-card{
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:12px;
+transition:0.3s;
+}
+
+.skill-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 15px rgba(56,189,248,0.5);
+}
+
+/* PROJECT */
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.project-card{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:12px;
+transition:0.3s;
+}
+
+.project-card:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px rgba(99,102,241,0.6);
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:30px;
+background:rgba(255,255,255,0.03);
+margin-top:50px;
+}
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Membuat kolom otomatis */
+  gap: 20px; /* Jarak antar foto */
+  padding: 20px;
+  align-items: center; /* Menyejajarkan foto secara vertikal */
+}
+
+.gallery-container img {
+  width: 100%; /* Agar foto mengikuti lebar kolom */
+  height: auto;
+  border-radius: 8px; /* Opsional: agar sudutnya tumpul */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Opsional: memberi bayangan halus */
+}
+.gallery-container {
+  display: flex;
+  justify-content: center; /* Menengahkan foto */
+  align-items: flex-start; /* Sejajar di bagian atas */
+  gap: 30px;
+  flex-wrap: wrap; /* Agar foto turun ke bawah jika layar kecil */
+}
+
+.gallery-container img {
+  max-width: 45%; /* Membatasi lebar agar muat dua foto sejajar */
+  height: auto;
+  object-fit: contain; /* Menjaga proporsi foto agar tidak gepeng */
+}
+/* Container utama untuk galeri */
+.gallery-container {
+    display: grid;
+    /* Membuat 3 kolom yang sama besar, otomatis menyesuaikan layar */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px; /* Jarak antar foto */
+    padding: 20px 0;
+    justify-items: center; /* Menengahkan gambar di dalam grid */
+}
+
+/* Mengatur gambar agar ukurannya seragam */
+.gallery-container img {
+    width: 100%;
+    height: 300px; /* Tentukan tinggi yang sama agar rapi */
+    object-fit: cover; /* Foto akan dipotong secara proporsional, tidak gepeng */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+/* Efek saat gambar diarahkan mouse (opsional) */
+.gallery-container img:hover {
+    transform: scale(1.05);
+}
+/* Sembunyikan modal secara default */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.9); /* Latar belakang hitam transparan */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ukuran foto saat pop-up */
+.modal-content {
+  max-width: 90%;
+  max-height: 80%;
+  border: 3px solid white;
+  border-radius: 10px;
+}
+
+/* Tombol close */
+.close {
+  position: absolute;
+  top: 20px; right: 35px;
+  color: white; font-size: 40px; cursor: pointer;
+}
+/* Container untuk mengatur tata letak kotak */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 40px;
+  background-color: #0b1120; /* Warna background sangat gelap */
+}
+
+/* Style dasar untuk semua kartu */
+.card {
+  background-color: #172033;
+  padding: 25px;
+  border-radius: 15px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+/* Efek saat kursor di atas kotak (Semua Kotak) */
+.card:hover {
+  transform: scale(1.05); /* Sedikit membesar */
+  border-color: #3b82f6;   /* Border berubah jadi biru terang */
+  
+  /* Efek Glow Bayangan Biru */
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 
+              0 0 40px rgba(59, 130, 246, 0.2);
+}
+
+/* Efek saat kotak diklik (Semua Kotak) */
+.card:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+}
+
+/* Styling Header di dalam kartu */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  /* Membuat ikon ikut bersinar saat hover */
+  transition: filter 0.3s ease;
+}
+
+.card:hover .icon {
+  filter: drop-shadow(0 0 5px #3b82f6);
+}
+
+.card h3 {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.card p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h1>PORTOFOLIO</h1>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#Experience">Experience</a></li>
+<li><a href="#galeri">galeri</a></li>
+</ul>
+</nav>
+
+<div class="hero">
+
+<div class="hero-text">
+<h2>Halo, Saya <span>Dafano</span></h2>
+<p>Saya seorang pelajar yang memiliki ambis pada dunia Teknologi dan dunia Alam.</p>
+<button class="btn" onclick="scrollProjects()">Lihat Project</button>
+</div>
+
+<div class="profile">
+<img src="WhatsApp Image 2026-03-10 at 08.32.03.jpeg">
+<h3>Dafano</h3>
+<p>Student Developer</p>
+</div>
+
+</div>
+
+<section id="about">
+<h2 class="section-title">About Me🤔</h2>
+<p>
+Saya adalah seorang pelajar dari SMKN 2 KOTA BEKASI jurusan RPL. saya sangat suka eksperimen dan belajar semua hal, dan selain pada dunia teknologi saya juga tertarik dengan alam, biasanya saya sering ke curug,gunung,pantai dan lainnya. saya juga menduduki posisi sebagai Ketua Kelas X RPL 1😎
+</section>
+
+<section id="skills">
+<h2 class="section-title">Skills🌟</h2>
+
+<div class="skills">
+
+<div class="grid-container">
+  <div class="card">
+    <div class="card-header">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="icon">
+      <h3>HTML</h3>
+    </div>
+    <p>Membuat struktur website</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="icon">
+      <h3>CSS</h3>
+    </div>
+    <p>Desain modern dan responsive</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="icon">
+      <h3>JavaScript</h3>
+    </div>
+    <p>Membuat website interaktif</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="icon">
+      <h3>Python</h3>
+    </div>
+    <p>Machine Learning dan sistem berbasis text</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="icon">
+      <h3>Kali Linux</h3>
+    </div>
+    <p>Sistem pertahanan jaringan</p>
+  </div>
+</div>
+
+
+</div>
+</section>
+
+<section id="projects">
+<h2 class="section-title">Projects😉</h2>
+
+<div class="projects">
+
+<div class="project-card">
+<h3>Website Portfolio</h3>
+<p>Website portfolio pribadi dengan desain modern.</p>
+</div>
+
+<div class="project-card">
+<h3>Desain Poster Sumpah Pemuda</h3>
+<p>Poster digital menggunakan canva.</p>
+</div>
+
+<div class="project-card">
+<h3>Kalkulator</h3>
+<p>Kalkulator berbasis text menggunakan python.</p>
+</div>
+
+</div>
+</section>
+
+<section id="Experience">
+<h2 class="section-title">Experience🎶</h2>
+
+<div class="projects">
+
+<div class="project-card">
+<h3>Olimpiade OSSI</h3>
+<p>Medali Emas Ekonomi kategori SMA/SMK</p>
+</div>
+
+<div class="project-card">
+<h3>Korps Kadet Indonesia </h3>
+<p>Pelatihan Korps kadet di Sanggabuana 2025.</p>
+</div>
+
+<div class="project-card">
+<h3>Ketua Lomba 17 Agustus</h3>
+<p>Ketua penyelenggara 17an sebanyak 4x.</p>
+</div>
+
+</div>
+</section>
+
+<section id="galeri">
+<h2 class="section-title">Gallery😉</h2>
+
+<div class="projects">
+
+<div class="gallery-container">
+  <img src="barak.jpg" onclick="openFullSize(this.src)" style="cursor: pointer;">
+  <img src="ekonomi.jpg" onclick="openFullSize(this.src)" style="cursor: pointer;">
+  <img src="gunung.jpg" onclick="openFullSize(this.src)" style="cursor: pointer;">
+  <img src="kalkulator.jpg" onclick="openFullSize(this.src)" style="cursor: pointer;">
+</div>
+
+<div id="photoModal" class="modal" onclick="closeFullSize()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="fullImg">
+</div>
+
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Dafano Portfolio</p>
+</footer>
+
+<script>
+
+function scrollProjects(){
+document.querySelector("#projects").scrollIntoView({
+behavior:"smooth"
+});
+}
+function openFullSize(imgSrc) {
+  document.getElementById("fullImg").src = imgSrc;
+  document.getElementById("photoModal").style.display = "flex";
+}
+
+function closeFullSize() {
+  document.getElementById("photoModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
